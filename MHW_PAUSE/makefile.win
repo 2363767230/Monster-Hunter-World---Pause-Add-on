@@ -1,0 +1,35 @@
+# Project: MHW_PAUSE
+# Makefile created by Red Panda C++ 2.21
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = MHW_PAUSE_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o MHW_PAUSE_private.res
+CLEANOBJ  =  main.o  MHW_PAUSE_private.res MHW_PAUSE.exe
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = MHW_PAUSE.exe
+CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -pipe -Wall -D__DEBUG__
+RM       = del /q /f
+WINDRESFLAGS  = 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+MHW_PAUSE_private.res: MHW_PAUSE_private.rc 
+	$(WINDRES) -i MHW_PAUSE_private.rc --input-format=rc -o MHW_PAUSE_private.res -O coff $(WINDRESFLAGS) 
+
